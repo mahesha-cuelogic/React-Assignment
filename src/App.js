@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
-import Header from './components/layouts/Header';
+import { Header } from './components/layouts';
 import Private from './modules/private';
 import Public from './modules/public';
 
