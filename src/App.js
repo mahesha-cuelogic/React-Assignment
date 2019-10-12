@@ -1,11 +1,21 @@
 import React from 'react';
+import { Switch, Route, withRouter } from 'react-router-dom';
+import Header from './components/layouts/Header';
+import Private from './modules/private';
+import Public from './modules/public';
 
-function App() {
+@withRouter
+class App extends React.Component {
+render() {
   return (
-    <div className="App">
-      home
-    </div>
-  );
+  <div className="App">
+     <Header />
+     <Switch>
+       <Route exact path="/app" component={Private} />
+       <Route path="/" component={Public} />
+     </Switch>
+  </div>);
+}
 }
 
 export default App;
