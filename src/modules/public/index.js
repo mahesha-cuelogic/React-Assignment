@@ -6,7 +6,6 @@ import Auth from '../auth';
 @withRouter
 class Public extends React.Component {
   render() {
-    console.log('in public');
     return (
         <div className="public-pages">
           <Container text style={{ marginTop: '7em' }}>
