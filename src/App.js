@@ -6,10 +6,13 @@ import Public from './modules/public';
 
 @withRouter
 class App extends React.Component {
+  handleAuth = () => {
+    this.props.history.push('/auth/login');
+  }
 render() {
   return (
   <div className="App">
-     <Header />
+     <Header handleAuth={this.handleAuth} />
      <Switch>
        <Route exact path="/app" component={Private} />
        <Route path="/" component={Public} />
