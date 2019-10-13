@@ -1,3 +1,5 @@
+import Validator from 'validatorjs';
+import { mapValues } from 'lodash';
 
 class FormHandler {
     prepareForm = (fieldsArray = []) => {
@@ -17,6 +19,19 @@ class FormHandler {
 
     formChange = ({ form, result, field }) => {
         form.fields[field].value = result.value;
+        form.fields[field].error = '';
+        form.meta.isDirty = true;
+        const validation = new Validator(
+            mapValues(form.fields, f => f.value),
+            mapValues(form.fields, f => f.rule),
+          );
+        form.meta.isValid = validation.passes();
+        if (validation.errorCount && validation.errors.errors) {
+            Object.keys(validation.errors.errors).forEach((f) => {
+                form.fields[f].error = validation.errors.errors[f][0];
+            });
+        }
+        // console.log('validation', validation);
         return form;
     }
 }

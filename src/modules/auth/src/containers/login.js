@@ -5,11 +5,11 @@ import { Link } from 'react-router-dom';
 import { FormInput } from '../../../../components/formElements';
 
 const Login = (props) => {
-    const LOGIN_FORM = useSelector(state => state.authStore.LOGIN_FORM);
+    const LOGIN_FORM = useSelector(state => state.authStore.LOGIN_FORM, () => {});
     const dispatch = useDispatch();
     return (
       <Modal open size="mini" onClose={props.closeModal} closeIcon closeOnDimmerClick>
-            <Modal.Header>Login</Modal.Header>
+            <Modal.Header className="center-align">Login</Modal.Header>
             <Modal.Content>
                 <Form>
                     {
@@ -22,7 +22,7 @@ const Login = (props) => {
                     ))
                     }
                     <Divider hidden />
-                    <Button content="Login"/>
+                    <Button disabled={!LOGIN_FORM.meta.isValid} content="Login"/>
                 </Form>
                 <p>Not yet a user? {'  '}<Link to="/auth/register">Create New Account Here!!</Link></p>
             </Modal.Content>

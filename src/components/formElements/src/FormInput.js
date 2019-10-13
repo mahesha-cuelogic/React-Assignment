@@ -1,12 +1,12 @@
 import React from 'react';
-import { Input } from 'semantic-ui-react';
+import { Input, Form } from 'semantic-ui-react';
 
 const FormInput = ({ fieldData, onChange, name }) =>  {
     const { label, type, placeholder, error } = fieldData;
     return (
-        <div>
+        <Form.Field>
             {label &&
-            <p>{label}</p>
+            <label>{label}</label>
             }
             <Input
                 key={name}
@@ -15,9 +15,9 @@ const FormInput = ({ fieldData, onChange, name }) =>  {
                 placeholder={placeholder || 'Enter here'}
             />
             {error &&
-                <p>{`${error}!!!`}</p>
+                <p style={{ fontSize: '@12px', lineHeight: '@14px', color: 'red' }} >{`${error}!!!`}</p>
             }
-        </div>
+        </Form.Field>
     );
 }
 export default FormInput;
