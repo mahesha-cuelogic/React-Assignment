@@ -1,0 +1,1 @@
+export { default as FormHandler } from './src/formHandler'
