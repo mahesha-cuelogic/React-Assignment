@@ -18,9 +18,11 @@ const initialState = {
 
 const authStore = (state = initialState, action) => {
     switch (action.type) {
-        case FORM_CHANGE: return {
+        case FORM_CHANGE: 
+        const { form, result, field } = action;
+        return {
             ...state,
-            [action.form] : FormHandler.formChange()
+            [form] : FormHandler.formChange({ form: state[form], result, field })
         };
         case SAMPLE: return {
             ...state,

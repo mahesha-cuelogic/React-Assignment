@@ -14,5 +14,10 @@ class FormHandler {
         });
         return form;
     }
+
+    formChange = ({ form, result, field }) => {
+        form.fields[field].value = result.value;
+        return form;
+    }
 }
 export default new FormHandler();

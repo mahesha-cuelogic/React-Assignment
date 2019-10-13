@@ -1,6 +1,6 @@
 import { FORM_CHANGE, SAMPLE } from '../constants/basicActionTypes';
 
-export const formChange = ({ form, element }) => {
-    return { type: FORM_CHANGE, form, element };
+export const formChange = () => {
+    return { type: FORM_CHANGE };
   }
 export const sample = () =>  ({ type: SAMPLE });

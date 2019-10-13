@@ -9,7 +9,6 @@ import Register from './src/containers/Register';
 class Auth extends React.Component {
     handleCloseModal = () => this.props.history.push('/');
     render() {
-      console.log('in auth');
     return (
         <Container>
             <Switch>

@@ -7,7 +7,7 @@ const Register = (props) => {
     const REGISTER_FORM = useSelector(state => state.authStore.REGISTER_FORM);
     return (
             <Modal open size="mini" onClose={props.closeModal} closeIcon closeOnDimmerClick>
-                <Modal.Header>Signup</Modal.Header>
+                <Modal.Header>Sign Up</Modal.Header>
                 <Modal.Content>
                     <Form >
                         {

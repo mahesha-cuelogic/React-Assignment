@@ -1,12 +1,12 @@
 import React from 'react';
 import { Modal, Form, Divider, Button } from 'semantic-ui-react';
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { FormInput } from '../../../../components/formElements';
 
 const Login = (props) => {
     const LOGIN_FORM = useSelector(state => state.authStore.LOGIN_FORM);
-
+    const dispatch = useDispatch();
     return (
       <Modal open size="mini" onClose={props.closeModal} closeIcon closeOnDimmerClick>
             <Modal.Header>Login</Modal.Header>
@@ -17,6 +17,7 @@ const Login = (props) => {
                         <FormInput
                             name={field}
                             fieldData={LOGIN_FORM.fields[field]}
+                            onChange={(e, result) => dispatch({ type: 'FORM_CHANGE', field, event: e, result, form: 'LOGIN_FORM' })}
                         />
                     ))
                     }
