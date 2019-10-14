@@ -1,14 +1,15 @@
 import firebase from 'firebase';
+export const {APPKEY, AUTHDOMAIN, MESID, DBURL, PROJECTID, STORAGEBUCKET, MSGSENDERID, APPID} = process.env;
 
 const firebaseConfig = {
-     apiKey: "AIzaSyColRrWYt67I-4hWCA0TZJzmbsYoTzDMwA",
-     authDomain: "mahi-react-assignment.firebaseapp.com",
-     databaseURL: "https://mahi-react-assignment.firebaseio.com",
-     projectId: "mahi-react-assignment",
-     storageBucket: "mahi-react-assignment.appspot.com",
-     messagingSenderId: "489253843924",
-     appId: "1:489253843924:web:7c18834402d64de7c71c41",
-     measurementId: "G-91Y58YH013"
+     apiKey: APPKEY,
+     authDomain: AUTHDOMAIN,
+     databaseURL: DBURL,
+     projectId: PROJECTID,
+     storageBucket: STORAGEBUCKET,
+     messagingSenderId: MSGSENDERID,
+     appId: APPID,
+     measurementId: MESID
    };
 class Auth {
     constructor() {
