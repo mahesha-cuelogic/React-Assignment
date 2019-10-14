@@ -1,12 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Modal, Form, Divider, Button } from 'semantic-ui-react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom';
 import { FormInput } from '../../../../components/formElements';
+import Auth from '../../../../api/auth';
 
 const Login = (props) => {
+    const [loading, setLoader] = useState(false);
+    const [error, setError] = useState('');
     const LOGIN_FORM = useSelector(state => state.authStore.LOGIN_FORM, () => {});
     const dispatch = useDispatch();
+    const { email, password } = LOGIN_FORM.fields;
+    const login = async () => {
+        setLoader(true);
+        try {
+            await Auth.login({ email: email.value, password: password.value });
+            props.success();
+        } catch (error) {
+            setError(error.message);
+        }
+        setLoader(false);
+    }
     return (
       <Modal open size="mini" onClose={props.closeModal} closeIcon closeOnDimmerClick>
             <Modal.Header className="center-align">Login</Modal.Header>
@@ -22,7 +36,10 @@ const Login = (props) => {
                     ))
                     }
                     <Divider hidden />
-                    <Button disabled={!LOGIN_FORM.meta.isValid} content="Login"/>
+                    <Button loading={loading} disabled={!LOGIN_FORM.meta.isValid} content="Login" onClick={login}/>
+                    {error &&
+                        (<p style={{ color: 'red' }}>{error}</p>)
+                    }
                 </Form>
                 <p>Not yet a user? {'  '}<Link to="/auth/register">Create New Account Here!!</Link></p>
             </Modal.Content>

@@ -1,11 +1,25 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Modal, Form, Button, Divider } from 'semantic-ui-react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FormInput } from '../../../../components/formElements';
+import Auth from '../../../../api/auth';
 
 const Register = (props) => {
+    const [loading, setLoader] = useState(false);
+    const [error, setError] = useState('');
     const REGISTER_FORM = useSelector(state => state.authStore.REGISTER_FORM, () => {});
     const dispatch = useDispatch();
+    const { email, password } = REGISTER_FORM.fields;
+    const register = async () => {
+        setLoader(true);
+        try {
+            await Auth.register({ email: email.value, password: password.value });
+            props.success();
+        } catch (error) {
+            setError(error.message);
+        }
+        setLoader(false);
+    }
     return (
             <Modal open size="mini" onClose={props.closeModal} closeIcon closeOnDimmerClick>
                 <Modal.Header className="center-align">Sign Up</Modal.Header>
@@ -21,7 +35,10 @@ const Register = (props) => {
                         ))
                         }
                         <Divider hidden />
-                        <Button disabled={!REGISTER_FORM.meta.isValid} content="Register"/>
+                        <Button loading={loading} disabled={!REGISTER_FORM.meta.isValid} content="Register" onClick={register} />
+                        {error &&
+                        (<p style={{ color: 'red' }}>{error}</p>)
+                        }
                     </Form>
                 </Modal.Content>
             </Modal>
