@@ -7,7 +7,7 @@ class Private extends React.Component {
     return (
         <div className="private-pages">
             <Container text style={{ marginTop: '7em' }}>
-            Private layout
+            Welcome to the world of Knowledge!!!
             </Container>
         </div>
       );

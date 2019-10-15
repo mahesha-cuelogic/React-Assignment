@@ -3,17 +3,21 @@ import { Modal, Form, Button, Divider } from 'semantic-ui-react';
 import { useSelector, useDispatch } from 'react-redux';
 import { FormInput } from '../../../../components/formElements';
 import Auth from '../../../../api/auth';
+import Database from '../../../../api/dataBase';
+import formHandler from '../../../../services/utilites/src/formHandler';
 
 const Register = (props) => {
     const [loading, setLoader] = useState(false);
     const [error, setError] = useState('');
     const REGISTER_FORM = useSelector(state => state.authStore.REGISTER_FORM, () => {});
     const dispatch = useDispatch();
-    const { email, password } = REGISTER_FORM.fields;
     const register = async () => {
+        const payload = formHandler.EvaluateFormData({ form: REGISTER_FORM });
         setLoader(true);
         try {
-            await Auth.register({ email: email.value, password: password.value });
+            const res = await Auth.register(payload);
+            console.log(res);
+            await Database.set('users', { ...payload, uid: res.user.uid });
             props.success();
         } catch (error) {
             setError(error.message);

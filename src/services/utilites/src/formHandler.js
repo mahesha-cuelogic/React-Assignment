@@ -32,5 +32,11 @@ class FormHandler {
         // console.log('validation', validation);
         return form;
     }
+
+    EvaluateFormData = ({ form }) => {
+        let fields = {};
+        fields = mapValues(form.fields, f => f.value);
+        return fields;
+    }
 }
 export default new FormHandler();

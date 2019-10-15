@@ -1,15 +1,15 @@
 import firebase from 'firebase';
-export const {APPKEY, AUTHDOMAIN, MESID, DBURL, PROJECTID, STORAGEBUCKET, MSGSENDERID, APPID} = process.env;
+export const {REACT_APP_KEY, REACT_APP_AUTH_DOMAIN, REACT_APP_MEASUREMENT_ID, REACT_APP_DB_URL, REACT_APP_PROJECT_ID, REACT_APP_STORAGE_BUCKET, REACT_APP_MSGING_SENDER_ID, REACT_APP_APP_ID} = process.env;
 
 const firebaseConfig = {
-     apiKey: APPKEY,
-     authDomain: AUTHDOMAIN,
-     databaseURL: DBURL,
-     projectId: PROJECTID,
-     storageBucket: STORAGEBUCKET,
-     messagingSenderId: MSGSENDERID,
-     appId: APPID,
-     measurementId: MESID
+     apiKey: REACT_APP_KEY,
+     authDomain: REACT_APP_AUTH_DOMAIN,
+     databaseURL: REACT_APP_DB_URL,
+     projectId: REACT_APP_PROJECT_ID,
+     storageBucket: REACT_APP_STORAGE_BUCKET,
+     messagingSenderId: REACT_APP_MSGING_SENDER_ID,
+     appId: REACT_APP_APP_ID,
+     measurementId: REACT_APP_MEASUREMENT_ID
    };
 class Auth {
     constructor() {
@@ -19,7 +19,6 @@ class Auth {
         let res;
         try {
             res = await firebase.auth().createUserWithEmailAndPassword(email, password);
-            console.log('sucess', res);
         } catch (error) {
             console.log('error', error);
             throw new Error(error);
@@ -30,7 +29,6 @@ class Auth {
         let res;
         try {
             res = await firebase.auth().signInWithEmailAndPassword(email, password);
-            console.log('sucess', res);
         } catch (error) {
             console.log('error', error);
             throw new Error(error);
