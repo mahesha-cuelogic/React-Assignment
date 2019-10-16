@@ -1,19 +1,20 @@
 import React from 'react';
-import { StoreContext as createStore } from './createStore';
-import { StoreContext as uiStore } from './uiStore';
+import { StoreContext as uiStore } from './stores/uiStore';
+import { StoreContext as authStore } from './stores/authStore';
 
 const contextMapping = {
-    'createStore': createStore,
     'uiStore': uiStore,
+    'authStore': authStore,
 }
 
 const withStore = (WrappedComponent, contextName) => {
     const StoreContext = contextMapping[contextName];
     return class extends React.Component {
+      getStore = (contxt) => { return { [contextName] : contxt } }
       render() {
         return (
           <StoreContext.Consumer>
-            {context => <WrappedComponent store={context} {...this.props} />}
+            {context => <WrappedComponent {...this.getStore(context)} {...this.props} />}
           </StoreContext.Consumer>
         )
       }

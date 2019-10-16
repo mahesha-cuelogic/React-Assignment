@@ -14,7 +14,8 @@ const Login = (props) => {
     const login = async () => {
         setLoader(true);
         try {
-            await Auth.login({ email: email.value, password: password.value });
+            const res = await Auth.login({ email: email.value, password: password.value });
+            console.log('login', res);
             props.success();
         } catch (error) {
             setError(error.message);
