@@ -3,6 +3,7 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import { Header } from './components/layouts';
 import Private from './modules/private';
 import Public from './modules/public';
+import { createStore, uiStore } from '../src/components/HOCs';
 
 @withRouter
 class App extends React.Component {
@@ -18,4 +19,4 @@ render() {
 }
 }
 
-export default App;
+export default uiStore(createStore(App));
