@@ -1,22 +1,24 @@
 import React, { useState } from 'react';
 import { Modal, Form, Divider, Button } from 'semantic-ui-react';
-import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { FormInput } from '../../../../components/formElements';
 import Auth from '../../../../api/auth';
+import { withStore } from '../../../../components/HOCs';
+import { FormHandler } from '../../../../services/utilites';
 
 const Login = (props) => {
     const [loading, setLoader] = useState(false);
     const [error, setError] = useState('');
-    const LOGIN_FORM = useSelector(state => state.authStore.LOGIN_FORM, () => {});
-    const dispatch = useDispatch();
-    const { email, password } = LOGIN_FORM.fields;
+    const { LOGIN_FORM, formChange, set } = props.authStore;
+    const payload = FormHandler.EvaluateFormData({ form: LOGIN_FORM });
     const login = async () => {
         setLoader(true);
         try {
-            const res = await Auth.login({ email: email.value, password: password.value });
+            const res = await Auth.login(payload);
             console.log('login', res);
-            props.success();
+            props.history.push('/app');
+            set('isUserLoggedIn', true);
         } catch (error) {
             setError(error.message);
         }
@@ -32,7 +34,8 @@ const Login = (props) => {
                         <FormInput
                             name={field}
                             fieldData={LOGIN_FORM.fields[field]}
-                            onChange={(e, result) => dispatch({ type: 'FORM_CHANGE', field, event: e, result, form: 'LOGIN_FORM' })}
+                            onChange={(e, result) => formChange({field, event: e, result, form: 'LOGIN_FORM'})}
+                            // onChange={(e, result) => dispatch({ type: 'FORM_CHANGE', field, event: e, result, form: 'LOGIN_FORM' })}
                         />
                     ))
                     }
@@ -47,4 +50,4 @@ const Login = (props) => {
         </Modal>
     );
 }
-export default Login;
+export default withRouter(withStore(withStore(Login, 'authStore'), 'uiStore'));

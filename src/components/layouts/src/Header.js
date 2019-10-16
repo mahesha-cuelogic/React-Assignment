@@ -5,8 +5,7 @@ import logo from '../../Assets/logo2.png';
 import { withStore } from '../../../components/HOCs';
 
 const Header = (props) => {
-  console.log('props in header', props);
-  window.headerprops = props;
+  const { isUserLoggedIn } = props.authStore;
   return (
     <div>
       <Menu fixed='top' inverted>
@@ -15,12 +14,14 @@ const Header = (props) => {
             <Image size='mini' src={logo} style={{ marginRight: '1.5em' }} />
             GyanBase
           </Menu.Item>
+          {!isUserLoggedIn &&
           <Menu.Item position='right'>
           <Button inverted as={Link} to="/auth/login" className="right">Login</Button>
           <Button as={Link} to="/auth/register" inverted style={{ marginLeft: '0.5em' }}>
                       Sign Up
                     </Button>
           </Menu.Item>
+          }
         </Container>
       </Menu>
   </div>
@@ -28,4 +29,4 @@ const Header = (props) => {
 }
 
 
-export default withStore(Header, 'uiStore')
+export default React.memo(withStore(Header, 'authStore'))

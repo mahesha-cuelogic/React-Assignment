@@ -1,16 +1,16 @@
 import React, { useState } from 'react';
 import { Modal, Form, Button, Divider } from 'semantic-ui-react';
-import { useSelector, useDispatch } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { FormInput } from '../../../../components/formElements';
 import Auth from '../../../../api/auth';
 import Database from '../../../../api/dataBase';
 import formHandler from '../../../../services/utilites/src/formHandler';
+import { withStore } from '../../../../components/HOCs';
 
 const Register = (props) => {
     const [loading, setLoader] = useState(false);
     const [error, setError] = useState('');
-    const REGISTER_FORM = useSelector(state => state.authStore.REGISTER_FORM, () => {});
-    const dispatch = useDispatch();
+    const { REGISTER_FORM, formChange, set } = props.authStore;
     const register = async () => {
         const payload = formHandler.EvaluateFormData({ form: REGISTER_FORM });
         setLoader(true);
@@ -18,7 +18,8 @@ const Register = (props) => {
             const res = await Auth.register(payload);
             console.log(res);
             await Database.set('users', { ...payload, uid: res.user.uid });
-            props.success();
+            set('isUserLoggedIn', true);
+            props.history.push('/app');
         } catch (error) {
             setError(error.message);
         }
@@ -34,8 +35,8 @@ const Register = (props) => {
                             <FormInput
                                 name={field}
                                 fieldData={REGISTER_FORM.fields[field]}
-                                onChange={(e, result) => dispatch({ type: 'FORM_CHANGE', field, event: e, result, form: 'REGISTER_FORM' })}
-                            />
+                                onChange={(e, result) => formChange({field, event: e, result, form: 'REGISTER_FORM'})}
+                                />
                         ))
                         }
                         <Divider hidden />
@@ -49,4 +50,4 @@ const Register = (props) => {
           );
 }
 
-export default Register;
+export default withRouter(withStore(Register, 'authStore'));
