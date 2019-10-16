@@ -28,4 +28,4 @@ const Header = (props) => {
 }
 
 
-export default withStore(Header, 'uiStore')
+export default withStore(Header, ['uiStore', 'authStore'])
