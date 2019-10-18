@@ -208,3 +208,7 @@ body .ui.inverted::-webkit-scrollbar-thumb:hover {
       -ms-flex-pack: center;
           justify-content: center;
 }
+.fullheight {
+  height: 100vh !important;
+  margin-top: 61px;
+}

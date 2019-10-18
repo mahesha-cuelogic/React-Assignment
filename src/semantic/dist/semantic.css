@@ -766,6 +766,11 @@ body .ui.inverted::-webkit-scrollbar-thumb:hover {
   -ms-flex-pack: center;
   justify-content: center;
 }
+
+.fullheight {
+  height: 100vh !important;
+  margin-top: 61px;
+}
 /*!
  * # Semantic UI 2.4.2 - Button
  * http://github.com/semantic-org/semantic-ui/
