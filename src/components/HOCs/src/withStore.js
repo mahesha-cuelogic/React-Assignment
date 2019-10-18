@@ -1,10 +1,12 @@
 import React from 'react';
 import { StoreContext as uiStore } from './stores/uiStore';
 import { StoreContext as authStore } from './stores/authStore';
+import { StoreContext as userStore } from './stores/authStore';
 
 const contextMapping = {
     'uiStore': uiStore,
     'authStore': authStore,
+    'userStore': userStore
 }
 
 const withStore = (WrappedComponent, contextName) => {

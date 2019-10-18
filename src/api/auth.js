@@ -35,6 +35,9 @@ class Auth {
         }
         return res;
     }
+    CheckIfUserLoggedIn = () => {
+            return localStorage.getItem('loggedInUserId');
+    }
 }
 
 export default new Auth();

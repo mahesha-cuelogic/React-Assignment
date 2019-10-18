@@ -16,7 +16,8 @@ const Login = (props) => {
         setLoader(true);
         try {
             const res = await Auth.login(payload);
-            console.log('login', res);
+            console.log('on login', res);
+            localStorage.setItem('loggedInUserId', res.user.uid);
             props.history.push('/app');
             set('isUserLoggedIn', true);
         } catch (error) {
@@ -32,7 +33,11 @@ const Login = (props) => {
                     {
                     Object.keys(LOGIN_FORM.fields).map(field => (
                         <FormInput
+                            fluid
+                            icon={LOGIN_FORM.fields[field].icon}
+                            iconPosition={LOGIN_FORM.fields[field].iconPosition}
                             name={field}
+                            key={field}
                             fieldData={LOGIN_FORM.fields[field]}
                             onChange={(e, result) => formChange({field, event: e, result, form: 'LOGIN_FORM'})}
                             // onChange={(e, result) => dispatch({ type: 'FORM_CHANGE', field, event: e, result, form: 'LOGIN_FORM' })}
@@ -40,7 +45,7 @@ const Login = (props) => {
                     ))
                     }
                     <Divider hidden />
-                    <Button loading={loading} disabled={!LOGIN_FORM.meta.isValid} content="Login" onClick={login}/>
+                    <Button color='teal' loading={loading} disabled={!LOGIN_FORM.meta.isValid} content="Login" onClick={login}/>
                     {error &&
                         (<p style={{ color: 'red' }}>{error}</p>)
                     }

@@ -5,7 +5,11 @@ import logo from '../../Assets/logo2.png';
 import { withStore } from '../../../components/HOCs';
 
 const Header = (props) => {
-  const { isUserLoggedIn } = props.authStore;
+  const { isUserLoggedIn, set } = props.authStore;
+  const handleLogout = () => {
+    set('isUserLoggedIn', false);
+    localStorage.setItem('loggedInUserId', '');
+  }
   return (
     <div>
       <Menu fixed='top' inverted>
@@ -14,14 +18,16 @@ const Header = (props) => {
             <Image size='mini' src={logo} style={{ marginRight: '1.5em' }} />
             GyanBase
           </Menu.Item>
-          {!isUserLoggedIn &&
           <Menu.Item position='right'>
+          {!isUserLoggedIn ?
+          <>
           <Button inverted as={Link} to="/auth/login" className="right">Login</Button>
           <Button as={Link} to="/auth/register" inverted style={{ marginLeft: '0.5em' }}>
                       Sign Up
-                    </Button>
+                    </Button></>
+          : <Button inverted onClick={handleLogout} className="right">Logout</Button>
+         }
           </Menu.Item>
-          }
         </Container>
       </Menu>
   </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input, Form } from 'semantic-ui-react';
 
-const FormInput = ({ fieldData, onChange, name }) =>  {
+const FormInput = ({ fieldData, onChange, name, ...props}) =>  {
     const { label, type, placeholder, error } = fieldData;
     return (
         <Form.Field>
@@ -13,6 +13,7 @@ const FormInput = ({ fieldData, onChange, name }) =>  {
                 type={type || "text"}
                 onChange={onChange}
                 placeholder={placeholder || 'Enter here'}
+                {...props}
             />
             {error &&
                 <p style={{ fontSize: '@12px', lineHeight: '@14px', color: 'red' }} >{`${error}!!!`}</p>
