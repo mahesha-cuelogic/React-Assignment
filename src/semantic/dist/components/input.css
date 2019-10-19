@@ -517,3 +517,6 @@
          Site Overrides
 *******************************/
 
+.ui.large.input.title {
+  width: 100%;
+}

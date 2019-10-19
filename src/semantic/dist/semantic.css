@@ -767,6 +767,32 @@ body .ui.inverted::-webkit-scrollbar-thumb:hover {
   justify-content: center;
 }
 
+.left-align {
+  text-align: left!important;
+  -webkit-box-pack: left;
+  -ms-flex-pack: left;
+  justify-content: left;
+}
+
+.container-width {
+  width: 80%;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.right-align {
+  text-align: right!important;
+  -webkit-box-pack: right;
+  -ms-flex-pack: right;
+  justify-content: right;
+}
+
+.ml-10 {
+  margin-left: 10px;
+}
+
 .fullheight {
   height: 100vh !important;
   margin-top: 61px;
@@ -5132,6 +5158,14 @@ body .ui.inverted::-webkit-scrollbar-thumb:hover {
 /*******************************
          Site Overrides
 *******************************/
+
+.ui.green.button {
+  background-color: #21ba45;
+  color: #fff;
+  text-shadow: none;
+  background-image: none;
+  margin-bottom: 20px;
+}
 /*!
  * # Semantic UI 2.4.2 - Container
  * http://github.com/semantic-org/semantic-ui/
@@ -13816,6 +13850,11 @@ i.icon.youtube.square {
 /*******************************
          Site Overrides
 *******************************/
+
+i.icon {
+  font-size: 1em;
+  margin-left: 10px;
+}
 /*!
  * # Semantic UI 2.4.2 - Image
  * http://github.com/semantic-org/semantic-ui/
@@ -14710,6 +14749,10 @@ img.ui.bordered.image {
 /*******************************
          Site Overrides
 *******************************/
+
+.ui.large.input.title {
+  width: 100%;
+}
 /*!
  * # Semantic UI 2.4.2 - Label
  * http://github.com/semantic-org/semantic-ui/

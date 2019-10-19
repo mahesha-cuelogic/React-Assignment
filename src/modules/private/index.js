@@ -1,5 +1,4 @@
 import React from 'react';
-import { Container } from 'semantic-ui-react';
 import { Route, withRouter, Switch } from 'react-router-dom';
 import { withStore } from '../../components/HOCs';
 import auth from '../../api/auth';
@@ -9,7 +8,7 @@ const getComponent = (path) => React.lazy(() => import(`./${path}`));
 window.getCo=getComponent;
 const routesMeta = [
   { componentPath: 'users', to: '/app/users'},
-  { componentPath: 'posts', to: '/app/posts'},
+  { componentPath: 'articles', to: '/app/articles'},
   { componentPath: 'accountSettings', to: '/app/accountSetting'},
   { componentPath: 'dashboard', to: '/app'},
 ];

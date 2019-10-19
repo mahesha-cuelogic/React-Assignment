@@ -3836,3 +3836,10 @@
          Site Overrides
 *******************************/
 
+.ui.green.button {
+  background-color: #21ba45;
+  color: #fff;
+  text-shadow: none;
+  background-image: none;
+  margin-bottom: 20px;
+}

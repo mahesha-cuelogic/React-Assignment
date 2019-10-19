@@ -208,6 +208,27 @@ body .ui.inverted::-webkit-scrollbar-thumb:hover {
       -ms-flex-pack: center;
           justify-content: center;
 }
+.left-align {
+  text-align: left!important;
+  -webkit-box-pack: left;
+      -ms-flex-pack: left;
+          justify-content: left;
+}
+.container-width {
+  width: 80%;
+}
+.mb-20 {
+  margin-bottom: 20px;
+}
+.right-align {
+  text-align: right!important;
+  -webkit-box-pack: right;
+      -ms-flex-pack: right;
+          justify-content: right;
+}
+.ml-10 {
+  margin-left: 10px;
+}
 .fullheight {
   height: 100vh !important;
   margin-top: 61px;

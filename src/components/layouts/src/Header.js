@@ -10,7 +10,7 @@ const Header = (props) => {
     set('isUserLoggedIn', false);
     localStorage.setItem('loggedInUserId', '');
   }
-  const showDashBoardCta=!props.location.pathname.includes('/app');
+  const showDashBoardCta=isUserLoggedIn && !props.location.pathname.includes('/app');
   return (
     <div>
       <Menu fixed='top' inverted>
