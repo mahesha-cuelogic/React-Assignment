@@ -6,7 +6,6 @@ import { withStore } from '../../../components/HOCs';
 
 const Header = (props) => {
   const { isUserLoggedIn, set } = props.authStore;
-  console.log('before withrouter', props);
   const handleLogout = () => {
     set('isUserLoggedIn', false);
     localStorage.setItem('loggedInUserId', '');

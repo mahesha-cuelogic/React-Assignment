@@ -32,7 +32,6 @@ const SidebarLayout = (props) => {
 
       <Sidebar.Pusher>
         <Segment basic>
-          <Header as='h3'>Application Content</Header>
           {props.children}
         </Segment>
       </Sidebar.Pusher>

@@ -12,7 +12,7 @@ render() {
   <div className="App">
      <Header />
      <Switch>
-       <Route exact path="/app" component={Private} />
+       <Route path="/app" component={Private} />
        <Route path="/" component={Public} />
      </Switch>
   </div>);

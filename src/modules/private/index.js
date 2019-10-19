@@ -36,7 +36,7 @@ class Private extends React.Component {
           <React.Suspense fallback={<div>Loading...</div>}>
             <Switch>
             {routesMeta.map(route => (
-              <Route exact path={route.to} component={getComponent(route.componentPath)} />
+              <Route path={route.to} component={getComponent(route.componentPath)} />
             ))}
             <Route component={<span> 404 </span>} />
             </Switch>
