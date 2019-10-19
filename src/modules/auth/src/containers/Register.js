@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Modal, Form, Button, Divider } from 'semantic-ui-react';
 import { withRouter } from 'react-router-dom';
 import { FormInput } from '../../../../components/formElements';
+import moment from 'moment';
 import Auth from '../../../../api/auth';
 import Database from '../../../../api/dataBase';
 import formHandler from '../../../../services/utilites/src/formHandler';
@@ -17,7 +18,7 @@ const Register = (props) => {
         try {
             const res = await Auth.register(payload);
             console.log(res);
-            await Database.set('users', { ...payload, uid: res.user.uid });
+            await Database.set('users', { ...payload, uid: res.user.uid, joiningDate: moment().format('LL'), userType: 'Writer'  });
             set('isUserLoggedIn', true);
             props.history.push('/app');
         } catch (error) {

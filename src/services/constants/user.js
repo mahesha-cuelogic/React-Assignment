@@ -8,3 +8,8 @@ export const REGISTER = [
     ['password', 'Password', 'required', 'password', ''],
     ['email', 'Email', 'required|email', '', ''],
 ];
+
+export const ARTICLE = [
+    ['title', 'Title', 'required', '', ''],
+    ['description', 'Description', 'required', '', ''],
+];

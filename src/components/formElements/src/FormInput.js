@@ -5,7 +5,7 @@ const FormInput = ({ fieldData, onChange, name, ...props}) =>  {
     const { label, type, placeholder, error } = fieldData;
     return (
         <Form.Field>
-            {label &&
+            {label && !props.hideTitle &&
             <label>{label}</label>
             }
             <Input

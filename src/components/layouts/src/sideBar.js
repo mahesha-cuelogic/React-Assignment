@@ -11,7 +11,6 @@ const navItems = [
 ];
 const SidebarLayout = (props) => {
   const { set } = props.authStore;
-  console.log('sidebar props', props);
   const handleLogout = () => {
     set('isUserLoggedIn', false);
     localStorage.setItem('loggedInUserId', '');

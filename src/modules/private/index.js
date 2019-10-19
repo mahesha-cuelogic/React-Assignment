@@ -3,6 +3,7 @@ import { Route, withRouter, Switch } from 'react-router-dom';
 import { withStore } from '../../components/HOCs';
 import auth from '../../api/auth';
 import SidebarLayout from '../../components/layouts/src/sideBar';
+import { WhiteLoader } from '../../components/layouts';
 
 const getComponent = (path) => React.lazy(() => import(`./${path}`));
 window.getCo=getComponent;
@@ -32,7 +33,7 @@ class Private extends React.Component {
         <div className="private-pages">
             <div text fluid className="fullheight">
           <SidebarLayout>
-          <React.Suspense fallback={<div>Loading...</div>}>
+          <React.Suspense fallback={<WhiteLoader />}>
             <Switch>
             {routesMeta.map(route => (
               <Route path={route.to} component={getComponent(route.componentPath)} />

@@ -9,9 +9,10 @@ import 'froala-editor/css/froala_editor.pkgd.min.css';
 
 // Require Font Awesome.
 // import 'font-awesome/css/font-awesome.css';
-const HtmlEditor = () => (
+const HtmlEditor = (props) => (
   <>
   <FroalaEditor
+  onModelChange={props.onChange}
   config={ {
       placeholderText: 'Edit Your Content Here!',
       charCounterCount: false,
@@ -20,6 +21,7 @@ const HtmlEditor = () => (
       // pluginsEnabled: ['align', 'charCounter', 'codeBeautifier', 'codeView', 'colors', 'draggable', 'embedly', 'emoticons', 'entities', 'file', 'fontFamily', 'fontSize', 'fullscreen', 'image', 'imageManager', 'inlineStyle', 'lineBreaker', 'link', 'lists', 'paragraphFormat', 'paragraphStyle', 'quickInsert', 'quote', 'save', 'table', 'url', 'video', 'wordPaste'],
   }
   }
+  
   />
   </>
 )

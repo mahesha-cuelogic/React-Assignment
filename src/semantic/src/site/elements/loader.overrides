@@ -1,3 +1,6 @@
 /*******************************
          Site Overrides
 *******************************/
+.ui.large.loader.pageloader {
+ margin-top: 150px;
+}

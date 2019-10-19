@@ -1,58 +1,48 @@
-import React from 'react'
-import { Button, Icon, Table } from 'semantic-ui-react'
+import React, { useState, useEffect } from 'react'
+import { Table } from 'semantic-ui-react'
+import dataBase from '../../../../api/dataBase';
+import { WhiteLoader } from '../../../../components/layouts';
 
-const allUsers = () => (
-  <Table compact celled definition>
-    <Table.Header>
-      <Table.Row>
-        <Table.HeaderCell>Name</Table.HeaderCell>
-        <Table.HeaderCell>Registration Date</Table.HeaderCell>
-        <Table.HeaderCell>E-mail address</Table.HeaderCell>
-        <Table.HeaderCell>Premium Plan</Table.HeaderCell>
-      </Table.Row>
-    </Table.Header>
-    <Table.Body>
-      <Table.Row>
-        <Table.Cell>John Lilki</Table.Cell>
-        <Table.Cell>September 14, 2013</Table.Cell>
-        <Table.Cell>jhlilk22@yahoo.com</Table.Cell>
-        <Table.Cell>No</Table.Cell>
-      </Table.Row>
-      <Table.Row>
-        <Table.Cell>Jamie Harington</Table.Cell>
-        <Table.Cell>January 11, 2014</Table.Cell>
-        <Table.Cell>jamieharingonton@yahoo.com</Table.Cell>
-        <Table.Cell>Yes</Table.Cell>
-      </Table.Row>
-      <Table.Row>
-        <Table.Cell>Jill Lewis</Table.Cell>
-        <Table.Cell>May 11, 2014</Table.Cell>
-        <Table.Cell>jilsewris22@yahoo.com</Table.Cell>
-        <Table.Cell>Yes</Table.Cell>
-      </Table.Row>
-    </Table.Body>
+const columnsHeaders = ['Name', 'E-mail address', 'Joined Date', 'User Type'];
 
-    <Table.Footer fullWidth>
-      <Table.Row>
-        <Table.HeaderCell />
-        <Table.HeaderCell colSpan='4'>
-          <Button
-            floated='right'
-            icon
-            labelPosition='left'
-            primary
-            size='small'
-          >
-            <Icon name='user' /> Add User
-          </Button>
-          <Button size='small'>Approve</Button>
-          <Button disabled size='small'>
-            Approve All
-          </Button>
-        </Table.HeaderCell>
-      </Table.Row>
-    </Table.Footer>
-  </Table>
-)
+const Allusers = () => {
+  const [loading, setLoader] = useState(true);
+  const [allUsers, setAllUsers] = useState(true);
+  const getAllUsers = () => {
+    const callBack = (res) => {
+      setAllUsers(res.val());
+      setLoader(false);
+  }
+  dataBase.getAllUsers(callBack);
+  };
+  useEffect(getAllUsers, []);
+  if (loading) {
+    return <WhiteLoader />
+  }
+  return (
+    <Table compact celled definition>
+      <Table.Header>
+        <Table.Row>
+          {columnsHeaders.map(i => (
+            <Table.HeaderCell>{i}</Table.HeaderCell>
+          ))
+          }
+        </Table.Row>
+      </Table.Header>
+      <Table.Body>
+        {Object.keys(allUsers).map(i => (
+          <Table.Row>
+            <Table.Cell>{allUsers[i].username}</Table.Cell>
+            <Table.Cell>{allUsers[i].email}</Table.Cell>
+            <Table.Cell>{allUsers[i].joiningDate || '-'}</Table.Cell>
+            <Table.Cell>{allUsers[i].userType || '-'}</Table.Cell>
+        </Table.Row>
+        ))
+        }
+      </Table.Body>
+  
+    </Table>
+  )
+}
 
-export default allUsers
+export default Allusers

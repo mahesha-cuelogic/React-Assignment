@@ -19,7 +19,7 @@ class FormHandler {
     }
 
     formChange = ({ form, result, field }) => {
-        form.fields[field].value = result.value;
+        form.fields[field].value = result.value || result;
         form.fields[field].error = '';
         form.meta.isDirty = true;
         const validation = new Validator(

@@ -3,10 +3,13 @@ import { Switch, Route, withRouter } from 'react-router-dom';
 import { Header } from './components/layouts';
 import Private from './modules/private';
 import Public from './modules/public';
-import { uiStore, authStore, userStore } from '../src/components/HOCs';
+import { uiStore, authStore, userStore, articleStore } from '../src/components/HOCs';
 
 @withRouter
 class App extends React.Component {
+  shouldComponentUpdate () {
+    return false;
+  }
 render() {
   return (
   <div className="App">
@@ -19,4 +22,4 @@ render() {
 }
 }
 
-export default userStore(uiStore(authStore(App)));
+export default articleStore(userStore(uiStore(authStore(App))));

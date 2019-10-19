@@ -1,14 +1,12 @@
 import React from 'react'
-import { LOGIN, REGISTER } from '../../../../services/constants/user'
+import { ARTICLE } from '../../../../services/constants/user'
 import { FormHandler } from '../../../../services/utilites'
 export const StoreContext = React.createContext()
 
-const authStore = WrappedComponent => {
+const articleStore = WrappedComponent => {
   return class extends React.Component {
     state = {
-      isUserLoggedIn: false,
-      LOGIN_FORM: FormHandler.prepareForm(LOGIN),
-      REGISTER_FORM: FormHandler.prepareForm(REGISTER),
+        ARTICLE_FORM: FormHandler.prepareForm(ARTICLE),
 
       get: key => {
         return this.state[key]
@@ -42,4 +40,4 @@ const authStore = WrappedComponent => {
   }
 }
 
-export default authStore
+export default articleStore
