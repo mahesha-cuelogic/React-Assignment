@@ -3,12 +3,17 @@ import { Icon, Table } from 'semantic-ui-react'
 import { Link, withRouter } from 'react-router-dom';
 import { withStore } from '../../../../components/HOCs'
 import dataBase from '../../../../api/dataBase';
-import { WhiteLoader } from '../../../../components/layouts';
+import { WhiteLoader, Paginate } from '../../../../components/layouts';
 
 const AllArticles = (props) => {
   const [loading, setLoader] = useState(true);
   const [AllArticles, setAllArticles] = useState({});
+  const [pageRequestData, setPaginationData] = useState({
+    page: 1, perPage: 5, totalPages: Math.ceil(Object.keys(AllArticles).length/5)
+  });
+
   const openArticle = (i) => props.history.push(`/app/articles/${i}`);
+
   const getAllArticles = () => {
     const callBack = (res) => {
       setAllArticles(res.val());
@@ -16,11 +21,15 @@ const AllArticles = (props) => {
   }
   dataBase.getAllArticles(callBack);
   };
+  const pageChange = () => {
+
+  }
   useEffect(getAllArticles, []);
-  console.log('AllArticles', AllArticles);
+
   if (loading) {
     return <WhiteLoader />
   }
+
   return (<Table celled >
     <Table.Header className="center-align">
       <Table.Row >
@@ -44,6 +53,11 @@ const AllArticles = (props) => {
         </Table.Row>
         ))
         }
+        <Table.Row>
+          <Table.Cell style={{ textAlign: 'right' }} colSpan="4" >
+            <Paginate pageRequestData={pageRequestData} pageChange={pageChange} />
+          </Table.Cell>
+          </Table.Row>
     </Table.Body>
   </Table>
 )

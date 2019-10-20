@@ -793,6 +793,10 @@ body .ui.inverted::-webkit-scrollbar-thumb:hover {
   margin-left: 10px;
 }
 
+.mt-10 {
+  margin-top: 10px;
+}
+
 .fullheight {
   height: 100vh !important;
   margin-top: 61px;
