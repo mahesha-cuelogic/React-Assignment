@@ -8,28 +8,41 @@ import { WhiteLoader, Paginate } from '../../../../components/layouts';
 const AllArticles = (props) => {
   const [loading, setLoader] = useState(true);
   const [AllArticles, setAllArticles] = useState({});
-  const [pageRequestData, setPaginationData] = useState({
-    page: 1, perPage: 5, totalPages: Math.ceil(Object.keys(AllArticles).length/5)
-  });
+  const [pageRequestData, setPaginationData] = useState({});
 
   const openArticle = (i) => props.history.push(`/app/articles/${i}`);
 
   const getAllArticles = () => {
     const callBack = (res) => {
-      setAllArticles(res.val());
+      const records = Object.values(res.val());
+      setAllArticles(records);
+      setPaginationData(
+        {
+        records: [...records].slice(0,  5 ),
+        page: 1,
+        perPage: 5,
+        totalPages: Math.ceil(records.length/5)
+        }
+      );
       setLoader(false);
   }
   dataBase.getAllArticles(callBack);
   };
-  const pageChange = () => {
-
+  const pageChange = (activePage) => {
+    const pageRequestObj = pageRequestData;
+    const { perPage } = pageRequestData;
+    pageRequestObj.page = activePage;
+    const fromIndex = (activePage - 1) ? ((activePage - 1)*perPage) : 0;
+    const tillIndex = activePage*perPage;
+    pageRequestObj.records = [...AllArticles].slice(fromIndex,   tillIndex );
+    setPaginationData({ ...pageRequestObj });
   }
   useEffect(getAllArticles, []);
 
   if (loading) {
     return <WhiteLoader />
   }
-
+  const { records } = pageRequestData;
   return (<Table celled >
     <Table.Header className="center-align">
       <Table.Row >
@@ -40,13 +53,13 @@ const AllArticles = (props) => {
       </Table.Row>
     </Table.Header>
     <Table.Body>
-    {Object.keys(AllArticles).map(i => (
-          <Table.Row key={i}>
-            <Table.Cell><b>{AllArticles[i].title || '-'}</b></Table.Cell>
-            <Table.Cell className="center-align">{AllArticles[i].lastUpdatedDate || '-'}</Table.Cell>
-            <Table.Cell className="center-align">{AllArticles[i].status || '-'}</Table.Cell>
+    {records.map(i => (
+          <Table.Row >
+            <Table.Cell><b>{i.title || '-'}</b></Table.Cell>
+            <Table.Cell className="center-align">{i.lastUpdatedDate || '-'}</Table.Cell>
+            <Table.Cell className="center-align">{i.status || '-'}</Table.Cell>
             <Table.Cell className="center-align">
-              <Icon link onClick={() => openArticle(i)} className="edit" />
+              <Icon link onClick={() => openArticle()} className="edit" />
               <Icon className="eye" />
               <Icon className="trash" />
           </Table.Cell>
