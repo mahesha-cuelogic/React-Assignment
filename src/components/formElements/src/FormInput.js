@@ -2,7 +2,7 @@ import React from 'react';
 import { Input, Form } from 'semantic-ui-react';
 
 const FormInput = ({ fieldData, onChange, name, ...props}) =>  {
-    const { label, type, placeholder, error } = fieldData;
+    const { label, type, placeholder, error, value } = fieldData;
     return (
         <Form.Field>
             {label && !props.hideTitle &&
@@ -12,6 +12,7 @@ const FormInput = ({ fieldData, onChange, name, ...props}) =>  {
                 key={name}
                 type={type || "text"}
                 onChange={onChange}
+                value={value}
                 placeholder={placeholder || 'Enter here'}
                 {...props}
             />

@@ -43,6 +43,16 @@ class DataBase {
         }
     }
 
+    getArticle = async (id, callBack) => {
+        try {
+            const ref = firebase.database().ref(`articles/${localStorage.getItem('loggedInUserId')}/${id}`)
+            ref.on('value', callBack);
+        } catch (error) {
+            console.log(error);
+            throw new Error(error);     
+        }
+    }
+
 }
 
 export default new DataBase();

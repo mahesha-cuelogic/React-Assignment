@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { withRouter } from 'react-router-dom';
 import { Modal, Button, Header } from 'semantic-ui-react'
 import { HtmlEditor, FormInput } from '../../../../components/formElements'
@@ -6,11 +6,12 @@ import withStore from '../../../../components/HOCs/src/withStore';
 import dataBase from '../../../../api/dataBase';
 import formHandler from '../../../../services/utilites/src/formHandler';
 import moment from 'moment';
+import { WhiteLoader } from '../../../../components/layouts';
 
 const ArticleModal = (props) => {
     const [loading, setLoader] = useState('');
     const closeModal = () => props.history.push('/app/articles');
-    const { ARTICLE_FORM, formChange } = props.articleStore;
+    const { ARTICLE_FORM, formChange, setFormData, resetFormData } = props.articleStore;
     const save = async (status='DRAFT') => {
       setLoader(status);
       const uid = localStorage.getItem('loggedInUserId');
@@ -20,7 +21,24 @@ const ArticleModal = (props) => {
         closeModal();
       } 
     }
-    console.log('ARTICLE_FORM', ARTICLE_FORM);
+
+    const getArticle = () => {
+      if (props.match.params.id === 'new') {
+        return;
+      }
+      setLoader('getArticle');
+      const callBack = (res) => {
+        setFormData({ form: 'ARTICLE_FORM', data: res.val()});
+        setLoader(false);
+    }
+    dataBase.getArticle(props.match.params.id, callBack);
+    };
+  
+    useEffect(() => { resetFormData({ form :'ARTICLE_FORM' }); getArticle(); }, []);
+
+    if (loading === 'getArticle') {
+      return (<WhiteLoader />)
+    }
     return (
         <Modal closeIcon open size="fullscreen" onClose={closeModal} >
         <Modal.Header>Create New Article</Modal.Header>
@@ -36,6 +54,7 @@ const ArticleModal = (props) => {
          <br />
          <Header as="h4">Description</Header>
          <HtmlEditor
+          content={ARTICLE_FORM.fields.description.value}
           onChange={(result) => formChange({field: 'description', result, form: 'ARTICLE_FORM'})}         
          />
         </Modal.Content>

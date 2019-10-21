@@ -14,7 +14,7 @@ const AllArticles = (props) => {
 
   const getAllArticles = () => {
     const callBack = (res) => {
-      const records = Object.values(res.val());
+      const records = Object.entries(res.val()).map(i => { return { articleId: i[0], ...i[1] }});
       setAllArticles(records);
       setPaginationData(
         {
@@ -59,7 +59,7 @@ const AllArticles = (props) => {
             <Table.Cell className="center-align">{i.lastUpdatedDate || '-'}</Table.Cell>
             <Table.Cell className="center-align">{i.status || '-'}</Table.Cell>
             <Table.Cell className="center-align">
-              <Icon link onClick={() => openArticle()} className="edit" />
+              <Icon link onClick={() => openArticle(i.articleId)} className="edit" />
               <Icon className="eye" />
               <Icon className="trash" />
           </Table.Cell>

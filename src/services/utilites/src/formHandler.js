@@ -39,5 +39,23 @@ class FormHandler {
         fields = mapValues(form.fields, f => f.value);
         return fields;
     }
+
+    setFormData = ({ form, data }) => {
+        let fields = { ...form.fields };
+        Object.keys(form.fields).forEach(field => {
+            if (data[field] !== undefined) {
+                fields[field].value=data[field];
+            };
+        });
+        return { ...form, fields };
+    }
+
+    resetFormData = ({ form }) => {
+        let fields = { ...form.fields };
+        Object.keys(form.fields).forEach(field => {
+            fields[field].value='';
+        });
+        return { ...form, fields };
+    }
 }
 export default new FormHandler();

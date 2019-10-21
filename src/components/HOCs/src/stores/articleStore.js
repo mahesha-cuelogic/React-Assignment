@@ -28,6 +28,18 @@ const articleStore = WrappedComponent => {
         const state = this.state
         state[form] = FormHandler.formChange({ form: state[form], result, field });
         this.setState(state);
+      },
+
+      setFormData: ({ form , data }) => {
+        const state = this.state
+        state[form] = FormHandler.setFormData({ form: state[form], data });
+        this.setState(state);
+      },
+
+      resetFormData: ({ form }) => {
+        const state = this.state
+        state[form] = FormHandler.resetFormData({ form: state[form] });
+        this.setState(state);
       }
     }
     render() {

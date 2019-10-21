@@ -13,6 +13,7 @@ const HtmlEditor = (props) => (
   <>
   <FroalaEditor
   onModelChange={props.onChange}
+  model={props.content}
   config={ {
       placeholderText: 'Edit Your Content Here!',
       charCounterCount: false,
